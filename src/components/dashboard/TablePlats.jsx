@@ -1,15 +1,16 @@
 import { Button, Popover, Table } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { InfoCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { DeletePlat, GetPlat, GetPlats } from "../../store/plats/PlatsSlicer";
 import Swal from "sweetalert2";
+import Filter from "../Filter";
 
 const TablePlats = () => {
   const navigate = useNavigate();
 
-  const platDelete = (uuid) => {
+  const platDelete = (plat) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -21,7 +22,7 @@ const TablePlats = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        dispacth(DeletePlat(uuid));
+        dispacth(DeletePlat(plat));
       }
     });
   };
@@ -31,7 +32,6 @@ const TablePlats = () => {
       title: "Plat",
       dataIndex: "plat",
       key: "plat",
-      render: (text) => <Link>{text}</Link>,
     },
     {
       title: "Nama",
@@ -59,8 +59,8 @@ const TablePlats = () => {
                     type="text"
                     style={{ marginBottom: "10px", background: "#D1E6E0" }}
                     onClick={() => {
-                      navigate(`/plat/${record.uuid}`);
-                      dispacth(GetPlat(record.uuid));
+                      navigate(`/plat/${record.plat}`);
+                      dispacth(GetPlat(record.plat));
                     }}
                   >
                     <InfoCircleOutlined />
@@ -68,7 +68,7 @@ const TablePlats = () => {
                   </Button>
                   <Button
                     type="text"
-                    onClick={() => platDelete(record.uuid)}
+                    onClick={() => platDelete(record.plat)}
                     style={{ background: "#f29bae" }}
                   >
                     <DeleteOutlined />
@@ -88,13 +88,24 @@ const TablePlats = () => {
 
   const dispacth = useDispatch();
   const response = useSelector((state) => state.plat.data.plats);
+  const [data, setData] = useState(response);
   useEffect(() => {
     dispacth(GetPlats());
   }, [dispacth]);
 
   return (
     <div style={{ padding: "50px" }}>
-      <Table rowKey="id" columns={columns} dataSource={response} />
+      <div
+        style={{
+          paddingBottom: "10px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Filter response={response} data={data} setData={setData} />
+      </div>
+      <Table rowKey="plat" columns={columns} dataSource={data} />
     </div>
   );
 };

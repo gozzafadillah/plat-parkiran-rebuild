@@ -1,5 +1,5 @@
 import { Button, Layout } from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
+import { Content, Header } from "antd/es/layout/layout";
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import ModalPlats from "../../components/dashboard/Modal";

@@ -70,9 +70,6 @@ const FormPlatDetail = (props) => {
         layout: "vertical",
       }}
     >
-      <Form.Item label="UUID" style={{ fontWeight: "600" }}>
-        <Input name="uuid" value={props.response.data.plat[0].uuid} disabled />
-      </Form.Item>
       <Form.Item label="Plat" style={{ fontWeight: "600" }}>
         <Input
           onChange={onChangeHandler}

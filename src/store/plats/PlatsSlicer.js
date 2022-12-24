@@ -106,9 +106,9 @@ const PlatSlice = createSlice({
       .addCase(UpdatePlat.fulfilled, (state, action) => {
         state.fecthStatus = "success";
         state.status = !state.status;
-        const uuid = action.payload.uuid;
+        const plat = action.payload.plat;
         const indexData = state.data.plats.findIndex(
-          (value) => value.uuid === uuid
+          (value) => value.plat === plat
         );
         const newArr = [...state.data.plats];
         if (indexData >= 0) {
@@ -128,7 +128,7 @@ const PlatSlice = createSlice({
         state.fecthStatus = "success";
         state.status = !state.status;
         state.data.plats = state.data.plats.filter(
-          (val) => val.uuid !== action.payload.uuid
+          (val) => val.plat !== action.payload.plat
         );
       })
       .addCase(DeletePlat.rejected, (state, action) => {
