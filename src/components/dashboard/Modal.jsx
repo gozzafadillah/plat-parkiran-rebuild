@@ -6,11 +6,16 @@ import { useDispatch } from "react-redux";
 import { CreatePlat } from "../../store/plats/PlatsSlicer";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
+import { io } from "socket.io-client";
 
 const ModalPlats = (props) => {
   // state
+  // const [rfid, setRfid] = useState("");
+  // const socket = io("http://192.168.1.25:5000");
+  const navigate = useNavigate();
+  const dispacth = useDispatch();
+
   const [data, setData] = useState({
-    uuid: uuidv4(),
     plat: "",
     nama: "",
     id_plat: "",
@@ -20,28 +25,48 @@ const ModalPlats = (props) => {
     keterangan: "",
     plat_nomor: "",
   });
-  const navigate = useNavigate();
 
-  const dispacth = useDispatch();
-
-  useEffect(() => {
-    if (props.getId) {
-    }
-  }, [props.getId]);
-
-  const [form] = Form.useForm();
   const onChangeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  // useEffect(() => {
+  //   socket.on("event", (data) => {
+  //     let t = JSON.parse(data.toString("utf8"));
+  //     setRfid(t);
+  //   });
+  // }, [socket, data]);
+
+  const [form] = Form.useForm();
+
   const onClickHandler = (e) => {
     e.preventDefault();
+    console.log(data);
     dispacth(CreatePlat(data));
+    setData({
+      plat: "",
+      nama: "",
+      id_plat: "",
+      free: 0,
+      saldo: 0,
+      status: "",
+      keterangan: "",
+      plat_nomor: "",
+    });
     props.handleOk();
-    navigate("/");
   };
 
   const onCancel = () => {
+    setData({
+      plat: "",
+      nama: "",
+      id_plat: "",
+      free: 0,
+      saldo: 0,
+      status: "",
+      keterangan: "",
+      plat_nomor: "",
+    });
     props.handleCancel();
   };
 
