@@ -24,12 +24,12 @@ const Filter = (props) => {
       props.setData(
         props.response.filter(
           (val) =>
-            val.nama.toLowerCase() === text.toLowerCase() ||
-            val.nama.toLowerCase().match(text.toLowerCase()) ||
-            val.id_plat.toLowerCase() === text.toLowerCase() ||
-            val.id_plat.toLowerCase().match(text.toLowerCase()) ||
-            val.plat.toLowerCase() === text.toLowerCase() ||
-            val.plat.toLowerCase().match(text.toLowerCase())
+            val.Nama.toLowerCase() === text.toLowerCase() ||
+            val.Nama.toLowerCase().match(text.toLowerCase()) ||
+            val.ID_Plat.toLowerCase() === text.toLowerCase() ||
+            val.ID_Plat.toLowerCase().match(text.toLowerCase()) ||
+            val.Plat.toLowerCase() === text.toLowerCase() ||
+            val.Plat.toLowerCase().match(text.toLowerCase())
         )
       );
     } else {

@@ -4,68 +4,75 @@ import React, { useEffect, useState } from "react";
 import { SendOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { CreatePlat } from "../../store/plats/PlatsSlicer";
-import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 
 const ModalPlats = (props) => {
   // state
-  // const [rfid, setRfid] = useState("");
-  // const socket = io("http://192.168.1.25:5000");
-  const navigate = useNavigate();
+  const [rfid, setRfid] = useState("");
+  const socket = io("http://192.168.1.25:5000");
   const dispacth = useDispatch();
 
   const [data, setData] = useState({
-    plat: "",
-    nama: "",
-    id_plat: "",
-    free: 0,
-    saldo: 0,
-    status: "",
-    keterangan: "",
-    plat_nomor: "",
+    Nama: "",
+    ID_Plat: "",
+    Free: 0,
+    Saldo: 0,
+    Status: "",
+    Keterangan: "",
+    Plat_Nomor: "",
   });
 
   const onChangeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  // useEffect(() => {
-  //   socket.on("event", (data) => {
-  //     let t = JSON.parse(data.toString("utf8"));
-  //     setRfid(t);
-  //   });
-  // }, [socket, data]);
+  useEffect(() => {
+    socket.on("event", (data) => {
+      let t = JSON.parse(data.toString("utf8"));
+      setRfid(t);
+    });
+  }, [socket, data]);
 
   const [form] = Form.useForm();
 
   const onClickHandler = (e) => {
     e.preventDefault();
-    console.log(data);
-    dispacth(CreatePlat(data));
+    dispacth(
+      CreatePlat({
+        Plat: rfid,
+        Nama: data.Nama,
+        ID_Plat: data.ID_Plat,
+        Free: data.Free,
+        Saldo: data.Saldo,
+        Status: data.Status,
+        Keterangan: data.Keterangan,
+        Plat_Nomor: data.Plat_Nomor,
+      })
+    );
+
     setData({
-      plat: "",
-      nama: "",
-      id_plat: "",
-      free: 0,
-      saldo: 0,
-      status: "",
-      keterangan: "",
-      plat_nomor: "",
+      Plat: "",
+      Nama: "",
+      ID_Plat: "",
+      Free: 0,
+      Saldo: 0,
+      Status: "",
+      Keterangan: "",
+      Plat_Nomor: "",
     });
     props.handleOk();
   };
 
   const onCancel = () => {
     setData({
-      plat: "",
-      nama: "",
-      id_plat: "",
-      free: 0,
-      saldo: 0,
-      status: "",
-      keterangan: "",
-      plat_nomor: "",
+      Plat: "",
+      Nama: "",
+      ID_Plat: "",
+      Free: 0,
+      Saldo: 0,
+      Status: "",
+      Keterangan: "",
+      Plat_Nomor: "",
     });
     props.handleCancel();
   };
@@ -83,15 +90,15 @@ const ModalPlats = (props) => {
           <Input
             onChange={onChangeHandler}
             placeholder="Plat.."
-            name="plat"
-            required
+            value={rfid}
+            disabled
           />
         </Form.Item>
         <Form.Item label="Nama" style={{ fontWeight: "600" }}>
           <Input
             onChange={onChangeHandler}
             placeholder="Nama Lengkap.."
-            name="nama"
+            name="Nama"
             required
           />
         </Form.Item>
@@ -99,7 +106,7 @@ const ModalPlats = (props) => {
           <Input
             onChange={onChangeHandler}
             placeholder="ID Plat.."
-            name="id_plat"
+            name="ID_Plat"
             required
           />
         </Form.Item>
@@ -107,28 +114,28 @@ const ModalPlats = (props) => {
           <Input
             onChange={onChangeHandler}
             placeholder="Plat Nomor..."
-            name="plat_nomor"
+            name="Plat_Nomor"
             required
           />
         </Form.Item>
         <Form.Item label="Free" style={{ fontWeight: "600" }}>
           <input
             onChange={onChangeHandler}
+            value={data.Free}
             type="number"
-            name="free"
-            id="free"
+            name="Free"
           />
         </Form.Item>
         <Form.Item label="Saldo" style={{ fontWeight: "600" }}>
           <input
             onChange={onChangeHandler}
+            value={data.Saldo}
             type="number"
-            name="saldo"
-            id="saldo"
+            name="Saldo"
           />
         </Form.Item>
         <Form.Item label="Status" style={{ fontWeight: "600" }}>
-          <select onChange={onChangeHandler} name="status" id="status">
+          <select onChange={onChangeHandler} name="Status" id="Status">
             <option value="">Pilih Status</option>
             <option value="Mahasiswa">Mahasiswa</option>
             <option value="Karyawan">Karyawan</option>
@@ -138,7 +145,7 @@ const ModalPlats = (props) => {
           <TextArea
             rows={4}
             onChange={onChangeHandler}
-            name="keterangan"
+            name="Keterangan"
             placeholder="keterangan..."
             allowClear
             required

@@ -30,19 +30,19 @@ const TablePlats = () => {
   const columns = [
     {
       title: "Plat",
-      dataIndex: "plat",
-      key: "plat",
+      dataIndex: "Plat",
+      key: "Plat",
     },
     {
       title: "Nama",
-      dataIndex: "nama",
-      key: "nama",
+      dataIndex: "Nama",
+      key: "Nama",
       responsive: ["md"],
     },
     {
       title: "ID Plat",
-      dataIndex: "id_plat",
-      key: "id_plat",
+      dataIndex: "ID_Plat",
+      key: "ID_Plat",
       responsive: ["lg"],
     },
     {
@@ -59,8 +59,8 @@ const TablePlats = () => {
                     type="text"
                     style={{ marginBottom: "10px", background: "#D1E6E0" }}
                     onClick={() => {
-                      navigate(`/plat/${record.plat}`);
-                      dispacth(GetPlat(record.plat));
+                      navigate(`/plat/${record.Plat}`);
+                      dispacth(GetPlat(record.Plat));
                     }}
                   >
                     <InfoCircleOutlined />
@@ -68,7 +68,7 @@ const TablePlats = () => {
                   </Button>
                   <Button
                     type="text"
-                    onClick={() => platDelete(record.plat)}
+                    onClick={() => platDelete(record.Plat)}
                     style={{ background: "#f29bae" }}
                   >
                     <DeleteOutlined />
@@ -105,7 +105,7 @@ const TablePlats = () => {
       >
         <Filter response={response} data={data} setData={setData} />
       </div>
-      <Table rowKey="plat" columns={columns} dataSource={data} />
+      <Table rowKey="Plat" columns={columns} dataSource={data} />
     </div>
   );
 };
