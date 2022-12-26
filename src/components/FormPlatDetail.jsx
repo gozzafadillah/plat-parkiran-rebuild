@@ -13,14 +13,14 @@ const FormPlatDetail = (props) => {
   const [form] = Form.useForm();
 
   const [data, setData] = useState({
-    plat: props.response.data.plat[0].plat,
-    nama: props.response.data.plat[0].nama,
-    id_plat: props.response.data.plat[0].id_plat,
-    free: props.response.data.plat[0].free,
-    saldo: props.response.data.plat[0].saldo,
-    status: props.response.data.plat[0].status,
-    keterangan: props.response.data.plat[0].keterangan,
-    plat_nomor: props.response.data.plat[0].plat_nomor,
+    Plat: props.response.data.plat[0].Plat,
+    Nama: props.response.data.plat[0].Nama,
+    ID_Plat: props.response.data.plat[0].ID_Plat,
+    Free: props.response.data.plat[0].Free,
+    Saldo: props.response.data.plat[0].Saldo,
+    Status: props.response.data.plat[0].Status,
+    Keterangan: props.response.data.plat[0].Keterangan,
+    Plat_Nomor: props.response.data.plat[0].Plat_Nomor,
   });
   const onChangeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -32,14 +32,14 @@ const FormPlatDetail = (props) => {
     const newData = {
       id: props.id,
       data: {
-        plat: data.plat,
-        nama: data.nama,
-        id_plat: data.id_plat,
-        keterangan: data.keterangan,
-        free: data.free,
-        saldo: data.saldo,
-        status: data.status,
-        plat_nomor: data.plat_nomor,
+        Plat: data.Plat,
+        Nama: data.Nama,
+        ID_Plat: data.ID_Plat,
+        Keterangan: data.Keterangan,
+        Free: data.Free,
+        Saldo: data.Saldo,
+        Status: data.Status,
+        Plat_Nomor: data.Plat_Nomor,
       },
     };
 
@@ -49,14 +49,14 @@ const FormPlatDetail = (props) => {
 
   const onCancel = () => {
     setData({
-      plat: "",
-      nama: "",
-      id_plat: "",
-      free: 0,
-      saldo: 0,
-      status: "",
-      keterangan: "",
-      plat_nomor: "",
+      Plat: "",
+      Nama: "",
+      ID_Plat: "",
+      Free: 0,
+      Saldo: 0,
+      Status: "",
+      Keterangan: "",
+      Plat_Nomor: "",
     });
     navigate("/");
   };
@@ -74,17 +74,17 @@ const FormPlatDetail = (props) => {
         <Input
           onChange={onChangeHandler}
           placeholder="Plat.."
-          name="plat"
-          value={data.plat}
-          required
+          value={data.Plat}
+          disabled
         />
       </Form.Item>
       <Form.Item label="Nama" style={{ fontWeight: "600" }}>
         <Input
           onChange={onChangeHandler}
           placeholder="Nama Lengkap.."
-          name="nama"
-          value={data.nama}
+          name="Nama"
+          id="Nama"
+          value={data.Nama}
           required
         />
       </Form.Item>
@@ -92,8 +92,9 @@ const FormPlatDetail = (props) => {
         <Input
           onChange={onChangeHandler}
           placeholder="ID Plat.."
-          name="id_plat"
-          value={data.id_plat}
+          name="ID_Plat"
+          id="ID_Plat"
+          value={data.ID_Plat}
           required
         />
       </Form.Item>
@@ -101,8 +102,9 @@ const FormPlatDetail = (props) => {
         <Input
           onChange={onChangeHandler}
           placeholder="Plat Nomor..."
-          name="plat_nomor"
-          value={data.plat_nomor}
+          name="Plat_Nomor"
+          id="Plat_Nomor"
+          value={data.Plat_Nomor}
           required
         />
       </Form.Item>
@@ -110,26 +112,26 @@ const FormPlatDetail = (props) => {
         <input
           onChange={onChangeHandler}
           type="number"
-          name="free"
-          value={data.free}
-          id="free"
+          name="Free"
+          value={data.Free}
+          id="Free"
         />
       </Form.Item>
       <Form.Item label="Saldo" style={{ fontWeight: "600", display: "flex" }}>
         <input
           onChange={onChangeHandler}
           type="number"
-          name="saldo"
-          id="saldo"
-          value={data.saldo}
+          name="Saldo"
+          id="Saldo"
+          value={data.Saldo}
         />
       </Form.Item>
       <Form.Item label="Status" style={{ fontWeight: "600", display: "flex" }}>
         <select
           onChange={onChangeHandler}
-          value={data.status}
-          name="status"
-          id="status"
+          value={data.Status}
+          name="Status"
+          id="Status"
         >
           <option value="">Pilih Status</option>
           <option value="Mahasiswa">Mahasiswa</option>
@@ -140,9 +142,9 @@ const FormPlatDetail = (props) => {
         <TextArea
           rows={4}
           onChange={onChangeHandler}
-          value={data.keterangan}
-          name="keterangan"
-          placeholder="keterangan..."
+          value={data.Keterangan}
+          name="Keterangan"
+          placeholder="Keterangan..."
           allowClear
           required
         />
